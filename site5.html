@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAMILY</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            overflow: auto;
+            font-size: 12;
+            flex-direction: column;
+            display: flex;
+            min-height: 100vh;
+            background-color: rgb(245,244,240);
+        }
+        ::selection{
+            background-color: rgba(15, 221, 101, 0.993);
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: auto; /* Adjust the height as needed */
+            overflow: hidden; /* Hide overflow content */
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensure the image covers the entire container */
+        }
+
+        
+
+        .content1 {
+            flex: 1;
+            padding: 20px;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image1 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .image1.expanded {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            position: fixed;
+            z-index: 999;
+            
+        }
+
+        .image-container1 {
+            float: right;
+            margin-bottom: 3vw;
+        }
+
+        .text-container {
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
+
+        .image2 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        .image2.expanded {
+            top: 50%;
+            left: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            z-index: 999;
+            width: 50%;
+            height: 50%;
+        }
+
+        
+        
+        h1 {
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            margin-left: 7vw;
+            margin-top: 3vw;
+            margin-right: 10vw;
+        }
+        h4 {
+            font-family: 'Segoe UI';
+            margin-left: 4vw;
+            margin-right: 4vw;
+            text-align: justify;
+        }
+
+
+
+
+        .button-container {
+            position: relative;
+            float: left;
+            margin-left: 50px;
+            margin-bottom: 30px;
+        }
+        .returnButton {
+            border-radius: 25px;
+            color:rgb(255, 255, 255);
+            background-color: black;
+            padding: 10px 33px;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 2;
+            
+        }
+        .returnButton:hover {
+            color:rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            border: 3px solid rgb(15, 221, 101);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .returnButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+        .back-button-container {
+            position: absolute;
+            display: flex;
+            margin-left: 30px;
+            margin-top: 25px;
+        }
+        .backButton {
+            color:rgb(255, 255, 255);
+            background-color: black;
+            max-height: 40px;
+            max-width: 90px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            
+        }
+        .backButton:hover {
+            color:rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            border: 3px solid rgb(15, 221, 101, 0.993);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .backButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            /*position: fixed;
+            bottom: 0;*/
+            position: relative;
+            
+        }
+
+        .social-icons li {
+            margin-right: 6vw;
+        }
+
+        .social-icons img {
+            width: 4vw;
+            height: 4vw;
+            max-width: 30px;
+            max-height: 30px;
+            /*border-radius: 50%;*/
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hover effect */
+        .social-icons img:hover {
+            opacity: 0.7;
+        }
+        .copyright {
+            padding: 0px 0px;
+            height: 20px;
+        }
+        h3 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: left;
+            margin-right: 10vw;
+            margin-bottom: 10px; 
+            margin-left: 7vw;
+        }
+        h6 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: right;
+            margin-right: 2vw;
+            margin-bottom: 10px;
+            margin-left: 10vw;
+        }
+
+        .dropdown {
+            position: absolute;
+            /*display: inline-block;*/
+            /*margin-right: 50px;*/
+            margin-top: 25px;
+            z-index: 1000;
+            right: 30px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .dropbtn {
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+            max-height: 40px;
+            max-width: 180px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family:'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
+        .dropbtn:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            border: 3px solid rgb(0, 0, 0);
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+
+        .dropbtn:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+        .dropdown-content {
+            display: none;
+            
+            background-color: rgb(0, 0, 0);
+            min-width: 90px;
+            max-width: 175px;
+            width: 40vw;
+            border: 3px solid rgb(15, 221, 101);
+            font-family:'Segoe UI';
+            z-index: 1000;
+            
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }  
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px); /* Adjust the blur level as needed */
+            pointer-events: none; /* Allows click events to pass through the overlay */
+            z-index: 998; /* Below the expanded image */
+            opacity: 0; /* Initially transparent */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .overlay.active {
+            opacity: 1; /* Show the overlay when the image is expanded */
+            z-index: 998;
+        }
+        @media screen and (max-width: 600px) {
+            .content1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .image-container1 {
+                align-items: center;
+                float: none;
+            }
+            .image1 {
+                align-self: center;
+            }
+            .image2 {
+                align-self: center;
+            }
+            .text-container {
+                width: 100%;
+                clear: both;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <img src="Hero finished_finished.png" alt="Hero Image">
+        <!-- You can add other content inside the hero section if needed -->
+    </div>
+    
+    <div class="back-button-container">
+        <button class="backButton" onclick="returnToMain()">BACK</button>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">MORE ABOUT ME</button>
+        <div class="dropdown-content">
+            <a onclick="loadPage('site2.html')" target="_blank">RESEARCH</a>
+            <a onclick="loadPage('site3.html')" target="_blank">ACHIEVEMENTS</a>
+            <a onclick="loadPage('site1.html')" target="_blank">SKILLS</a>
+            <a onclick="loadPage('site4.html')" target="_blank">VALUES</a>
+            <a onclick="loadPage('site5.html')" target="_blank">FAMILY</a>
+            
+        </div>
+    </div>
+    <h1>FAMILY HISTORY</h1>
+    <h3>Genealogical research reveals unknown ancestors from past centuries.
+        Thanks to the internet and artificial intelligence, it is now easier 
+        than ever to find out the origin of a family name. The results of my
+        research on my name Dudli/Dutli are presented here.
+    </h3>
+    <h3>EARLY BEGINNINGS (1400-1800)</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="transparent_wappen.png" class="image1" alt="Image1">
+           
+        </div>    
+        <div class = "text-container" >
+            <h4>Historical documents mention the surname "Dudli"/ "Dudle"/ "Dudlin"/ "Tudlin"/ "Thudlinen" for the first time at the end of the 15th century in St. Gallen (Switzerland). The farmers "Heinimann and Thomas Tudli" are mentioned. However, it could also be that the surname originates from a famous monk from the 9th century, namely "Tuotilo von St. Gallen".</h4>
+
+            <h4>In the following generations, the names of the family members (Ulrich Tudli von Schmucklisberg, Mauriz Tudli von Sirnach, Bernhardt Tudli von Wolfertswil, Jakob Tudli von Oberuzwil, Joseph Tudli von Oberbüren, Joseph Dudli von Schwarzenbach, Josef Dudli von Watt, Josef Dudli von Wagdenau) make the family's social status clear. They belonged to the lower nobility and enjoyed the privileges of the medieval social pyramid. The Tudlis built granaries (the last one still stands today, built by Amadudlehar = Mr. Ammann Dudle), administered their estates as bailiffs, looked after the churches and made decisions in district courts. But there were also many family members who lived in simple circumstances, for example as farmers.</h4>          
+        
+            <h4>Heraldic research has shown that the Dudli family had a family coat of arms. However, it is important to mention that Switzerland is unique in this respect: with the formation of nation states and democratization in Europe, many coats of arms were abolished and their use was heavily regulated. This was not the case in Switzerland. Many family and communal coats of arms still exist today.</h4>
+            
+            <h4>Blazoning: There is a red and gold helmet crest (tortillon) with a knightly helmet. The colors red and gold stand for power and wealth. The helmet is not gilded and is closed, which means that the family does not belong to the upper nobility. The shield is decorated with golden French lilies, which were used by the French Bourbon monarchy (since the 10th century) and awarded to families of good merit. The three leaves of the lily represent knighthood, faith and wisdom or the Holy Trinity. The three green mountains represent the rural landscape of Toggenburg. Moreover, the nails symbolize the crucifixion of Christ, thus the devotion to religion. Finally, there are two six-pointed golden stars.</h4>
+        </div>             
+    </div>
+    <h3>REVOLUTIONARY TURBULENCE AND DEMOCRATIZATION (1798-1848)</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="Der Erzähler_Zeitungsartikel.png" class="image1" alt="image2">
+            <div class="overlay"></div>
+        </div>    
+        <div class = "text-container" >
+            <h4>Later, success was reduced to a specific line of the family. Over the centuries, this line would always remain successful and hold leading positions in politics, administration, the church and later in banks. They successfully asserted themselves against their political opponents and the turbulence of their time. Their popularity is evidenced by the fact that they were able to assert themselves both in the monarchical system of the Ancien Régime and in the new democratic system that emerged after the French Revolution (Helvetic Republic). Although the bailiffs and cantonal councillors of the Dudli family were catholics and had profited from the old system, they did not incur the wrath of the people. When a group of peasants and soldiers from the Rhine Valley demanded more democratic rights and planned an uprising in 1798, the year of the revolution, most of the cantonal councillors fled. Only the cantonal councillor Dudli and his comrade bravely remained in the government building, as they were liberal among the conservatives and not a target of the uprising.</h4>
+        </div>             
+    </div>
+    <h3>MODERNITY: INDUSTRIALIZATION, DEMOCRACY, WORLD WARS, ... (1850-1945)</h3>
+    <div class="content1">  
+        <div class = "image-container1">
+            <img src="Invention_Albert Dudli_square_new.png" class="image1" alt="Image1">
+            
+        </div> 
+        <div class = "text-container" >
+            <h4>The Dudli family grew steadily over the centuries and expanded into various regions of Switzerland. They left politics and agriculture and began to become doctors, inventors, writers and shoe dealers. With their creativity and determination, they tried to overcome the dark times of the world wars and the social unrest of industrialization.</h4>
+            <h4>One example is Albert Dudli (1860-1926). He designed many sketches and invented numerous electrical kitchen instruments: potato peeling machines, kitchen sieves and frying devices.</h4>
+        </div>             
+    </div>
+    <h3>THE ART OF BEING A PROGRESSIVE CONSERVATIVE</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="Maria Dutli-Rutishauser.jpg" class="image1" alt="Image1">
+            
+        </div>    
+        <div class = "text-container" >
+            <h4>A characteristic feature of the members of the family was their ability to promote progressive and democratic developments with their conservative ideas. It was not only the cantonal councillors who were characterized by this supposed paradox, but also Maria Dutli-Rutishauser (1903-1995).</h4>
+            <h4>She managed to combine tradition and modernity without any contradictions. On the one hand she was the mother of six children, on the other she was a self-taught and successful writer. A devoted housewife on one side and a cosmopolitan who traveled around North Africa on the other. Her novels were translated into many languages and she also made contributions to the Swiss radio. With her work she fought for nation, family and religion. During the Second World War, Germany's National Socialist influences met with resistance from the Swiss spiritual national defence (Geistige Landesverteidigung), of which Dutli-Rutishauser was also a part. She emphasized Swiss values and thus stopped the brown ideology that was trying to infiltrate Switzerland from all sides. Although she held conservative views, such as the rejection of women's voting rights, her work as a writer and her travels in Africa demonstrate an early feminism, independence and rebellion against society's expectations.</h4>
+        </div>             
+    </div>
+    <h1></h1>
+
+        <!-- Your page content goes here -->
+    <div class="button-container">
+        <button class="returnButton" onclick="returnToMain()">RETURN</button>
+    </div>
+    <div class="social-section">
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/" target="_blank"><img src="facebook (1).png" alt="Facebook"></a></li>
+            <li><a href="https://twitter.com/indiscienceable" target="_blank"><img src="icons8-twitterx-60.png" alt="Twitter"></a></li>
+            <li><a href="https://www.instagram.com/gabriele.josee/" target="_blank"><img src="instagram (1).png" alt="Instagram"></a></li>
+            <li><a href="https://www.youtube.com/channel/UCy3v9MGMTjaEUH5nCrxT42A" target="_blank"><img src="youtube.png" alt="Youtube"></a></li>
+            <li><a href="https://ch.linkedin.com/in/gabriele-dutli-166636213" target="_blank"><img src="linkedin.png" alt="Linkedin"></a></li>
+            <!-- Add more social media icons with your own images as needed -->
+        </ul>
+    </div>
+    <div class="copyright">
+        <h6>© 2024 Gabriele Dutli</h6>
+    </div>
+
+    <script>
+        function returnToMain() {
+            window.location.href = "main.html";
+        }
+        function loadPage(pageUrl) {
+            window.location.href = pageUrl;
+        }
+        const image2 = document.querySelectorAll('.image1');
+        const overlay = document.querySelector('.overlay');
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SKILLS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            overflow: auto;
+            font-size: 12;
+            flex-direction: column;
+            display: flex;
+            min-height: 100vh;
+            background-color: rgb(245,244,240);
+        }
+        ::selection{
+            background-color: rgba(15, 221, 101, 0.993);
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: auto; /* Adjust the height as needed */
+            overflow: hidden; /* Hide overflow content */
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensure the image covers the entire container */
+        }
+
+        
+
+        .content1 {
+            flex: 1;
+            padding: 20px;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image1 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .image1.expanded {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            position: fixed;
+            z-index: 999;
+            
+        }
+
+        .image-container1 {
+            float: right;
+            margin-bottom: 3vw;
+        }
+
+        .text-container {
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
+
+        .image2 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        .image2.expanded {
+            top: 50%;
+            left: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            z-index: 999;
+            width: 50%;
+            height: 50%;
+        }
+
+        
+        
+        h1 {
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            margin-left: 7vw;
+            margin-top: 5vw;
+            margin-right: 10vw;
+            
+        }
+        h4 {
+            font-family: 'Segoe UI';
+            margin-left: 4vw;
+            margin-right: 4vw;
+            
+        }
+
+
+
+
+        .button-container {
+            position: relative;
+            float: left;
+            margin-left: 50px;
+            margin-bottom: 30px;
+        }
+        .returnButton {
+            border-radius: 25px;
+            color:rgb(255, 255, 255);
+            background-color: black;
+            padding: 10px 33px;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 2;
+            
+        }
+        .returnButton:hover {
+            color:rgb(0, 0, 0);
+            border: 3px solid rgb(15, 221, 101);
+            background-color: rgb(255, 255, 255);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .returnButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+        .back-button-container {
+            position: absolute;
+            display: flex;
+            margin-left: 30px;
+            margin-top: 25px;
+        }
+        .backButton {
+            color:rgb(255, 255, 255);
+            background-color: black;
+            max-height: 40px;
+            max-width: 90px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            
+        }
+        .backButton:hover {
+            color:rgb(0, 0, 0);
+            border: 3px solid rgb(15, 221, 101);
+            background-color: rgb(255, 255, 255);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .backButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            /*position: fixed;
+            bottom: 0;*/
+            position: relative;
+            
+        }
+
+        .social-icons li {
+            margin-right: 6vw;
+        }
+
+        .social-icons img {
+            width: 4vw;
+            height: 4vw;
+            max-width: 30px;
+            max-height: 30px;
+            /*border-radius: 50%;*/
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hover effect */
+        .social-icons img:hover {
+            opacity: 0.7;
+        }
+        .copyright {
+            padding: 0px 0px;
+            height: 20px;
+        }
+        h3 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: left;
+            margin-right: 10vw;
+            margin-bottom: 10px; 
+            margin-left: 7vw;
+        }
+        h6 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: right;
+            margin-right: 2vw;
+            margin-bottom: 10px;
+            margin-left: 10vw;
+        }
+
+        .dropdown {
+            position: absolute;
+            /*display: inline-block;*/
+            /*margin-right: 50px;*/
+            margin-top: 25px;
+            z-index: 1000;
+            right: 30px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .dropbtn {
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+            max-height: 40px;
+            max-width: 180px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family:'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
+        .dropbtn:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            border: 3px solid rgb(0, 0, 0);
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+
+        .dropbtn:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+        .dropdown-content {
+            display: none;
+            
+            background-color: rgb(0, 0, 0);
+            min-width: 90px;
+            max-width: 175px;
+            width: 40vw;
+            border: 3px solid rgb(15, 221, 101);
+            font-family:'Segoe UI';
+            z-index: 1000;
+            
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }  
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px); /* Adjust the blur level as needed */
+            pointer-events: none; /* Allows click events to pass through the overlay */
+            z-index: 998; /* Below the expanded image */
+            opacity: 0; /* Initially transparent */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .overlay.active {
+            opacity: 1; /* Show the overlay when the image is expanded */
+            z-index: 998;
+        }
+        
+        .quote {
+            font-style: italic;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .image-container1 {
+                align-items: center;
+                float: none;
+            }
+            .image1 {
+                align-self: center;
+            }
+            .image2 {
+                align-self: center;
+            }
+            .text-container {
+                width: 100%;
+                clear: both;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <img src="working_hard_new.png" alt="Hero Image">
+        <!-- You can add other content inside the hero section if needed -->
+    </div>
+    
+    <div class="back-button-container">
+        <button class="backButton" onclick="returnToMain()">BACK</button>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">MORE ABOUT ME</button>
+        <div class="dropdown-content">
+            <a onclick="loadPage('site2.html')" target="_blank">RESEARCH</a>
+            <a onclick="loadPage('site3.html')" target="_blank">ACHIEVEMENTS</a>
+            <a onclick="loadPage('site1.html')" target="_blank">SKILLS</a>
+            <a onclick="loadPage('site4.html')" target="_blank">VALUES</a>
+            <a onclick="loadPage('site5.html')" target="_blank">FAMILY</a>
+           
+        </div>
+    </div>
+    <h1>SKILLS & INTERESTS</h1>
+    <h3>I am a very curious person. I also have a drive for self-optimisation and inventions.
+         As a result of these character traits, I have already collected knowledge 
+         (at least superficial) in many different areas at a young age. 
+         I see education as an investment and a solution to many of our problems. 
+         Therefore, it is no surprise that I never stopped leaning, 
+         but I rather see it as a continuous journey. That is my definition of the meaning of life:
+         To understand and discover new things. 
+    </h3>
+    <h3 class = "quote">
+         
+         I always pursue the magic of different worlds that lead my senses to unknown territory 
+         and take my perception of reality to a higher level. In music it can be epic songs, 
+         in art it can be surrealism and in science it can be the exploration of the unknown.
+    </h3>
+    
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="Hydroponics.jpg" class="image1" alt="Image1">
+           
+        </div>
+        <h3>ACADEMIC SKILLS</h3>    
+        <div class = "text-container" >
+            <h4>
+                <ul>
+                    <li>engineering/ manufacturing/ robotics:</li>
+                        <ul>
+                            <li>material sciences</li>
+                            <li>CAD, parametric design</li>
+                            <li>3d printing, biocomposite filaments</li>
+                            <li>metamaterials, smart materials, hygromorphic bilayers</li>
+                            <li>compostable/ transient electronics, biosensors</li>
+                            <li>soft robotics</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>biology/ technology:</li>
+                        <ul>
+                            <li>bioinformatics</li>
+                            <li>bionics/ biomimicry</li>
+                            <li>hydroponics/ aeroponics</li>
+                            <li>aerial seeding</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>computer science/ robotics:</li>
+                        <ul>
+                            <li>coding: Python, Java, (CSS, JS, HTML)</li>
+                            <li>computational number theory: prime numbers research</li>
+                            <li>web development</li>
+                            <li>simulations and 3d animations</li>
+                            <li>DIY robotics (arduino)</li>
+                        </ul>
+                </ul>
+                <ul>
+                     <li>
+                        general interdisciplinary scientific knowledge
+                     </li>   
+                </ul>
+            </h4>
+        </div>             
+    </div>
+    <h3></h3>
+    
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="Starship.jpg" class="image1" alt="image2">
+            <div class="overlay"></div>
+        </div>    
+        <h3>INTERESTS/ HOBBIES</h3>
+        <div class = "text-container" >
+            <h4>
+                <ul>
+                    <li>sustainability:</li>
+                        <ul>
+                            <li>recycling/ upcycling</li>
+                            <li>renewable energy (solar, nuclear fusion, hygroelectrical power)</li>
+                            <li>DAC: direct air capture, carbon capture (climeworks, synhelion)</li>
+                            <li>bio-inspired solutions</li>
+                            <li>research: effects of antibiotic production</li>
+                            <li>circular economy</li>
+                            <li>energy efficient and low carbon architecture</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>chess</li>
+                </ul>
+                <ul>
+                    <li>languages:</li>
+                        <ul>
+                            <li>enlish</li>
+                            <li>spanish</li>
+                            <li>german</li>
+                            <li>french</li>
+                            <li>esperanto</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>astronomy/ rocket science/ space exploration:</li>
+                        <ul>
+                            <li>mars colonisation/ terraforming</li>
+                            <li>starship (spacex), artemis mission</li>
+                            <li>astronomical observations</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>innovation: products & marketing</li>
+                </ul>
+                <ul>
+                    <li>education:</li>
+                        <ul>
+                            <li>study strategies</li>
+                            <li>python scripts and AI for education</li>
+                            <li>The green revolution in the classroom: Educating a generation in touch with nature</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>digital art/ landscape photography:</li>
+                        <ul>
+                            <li>digital collage</li>
+                            <li>photoshop, adobe xd, adobe animate, adobe after effects</li>
+                            <li>slow-motion and time-lapse videos</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>politics/ history (1700-1990)/ social sciences:</li>
+                        <ul>
+                            <li>political science, social theories</li>
+                            <li>totalitarianism, communism</li>
+                            <li>wokism, effects of social media, current political events</li>
+                            <li>global power shifts</li>
+                            <li>demographic changes</li>
+                        </ul>
+                </ul>
+                <ul>
+                    <li>poetry/ literature/ philosophy:</li>
+                        <ul>
+                            <li>magic realism, age of enlightenment, greek mythology</li>
+                            <li>topics: injustice, oppression, colonisalism, rebellion, revolution, alienation, science: astronomy/ universe, botanics</li>
+                            <li>favourite authors: Gioconda Belli, George Orwell, Oedipus, G. E. Lessing, F. Kafka, Martin Suter, S. Hawking, Stefano Mancuso, John Strelecky</li>
+                            
+                        </ul>
+                </ul>
+            </h4>
+            
+        </div>             
+    </div>
+ 
+    <h1></h1>
+
+        <!-- Your page content goes here -->
+    <div class="button-container">
+        <button class="returnButton" onclick="returnToMain()">RETURN</button>
+    </div>
+    <div class="social-section">
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/" target="_blank"><img src="facebook (1).png" alt="Facebook"></a></li>
+            <li><a href="https://twitter.com/indiscienceable" target="_blank"><img src="icons8-twitterx-60.png" alt="Twitter"></a></li>
+            <li><a href="https://www.instagram.com/gabriele.josee/" target="_blank"><img src="instagram (1).png" alt="Instagram"></a></li>
+            <li><a href="https://www.youtube.com/channel/UCy3v9MGMTjaEUH5nCrxT42A" target="_blank"><img src="youtube.png" alt="Youtube"></a></li>
+            <li><a href="https://ch.linkedin.com/in/gabriele-dutli-166636213" target="_blank"><img src="linkedin.png" alt="Linkedin"></a></li>
+            <!-- Add more social media icons with your own images as needed -->
+        </ul>
+    </div>
+    <div class="copyright">
+        <h6>© 2024 Gabriele Dutli</h6>
+    </div>
+
+    <script>
+        function returnToMain() {
+            window.location.href = "main.html";
+        }
+        function loadPage(pageUrl) {
+            window.location.href = pageUrl;
+        }
+        const image2 = document.querySelectorAll('.image1');
+        const overlay = document.querySelector('.overlay');
+
+              
+    </script>
+</body>
+</html>

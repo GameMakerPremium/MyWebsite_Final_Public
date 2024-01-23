@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <link rel="stylesheet" type="text/css" href="styles2.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriele Dutli</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+
+
+
+<body>
+    
+    <video id="hero-video" autoplay loop muted>
+        <source src="Final hero.mp4" type="video/mp4">
+    </video>
+
+    <div class="logo">
+        <img src="banksy girl.png">
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn" id="dropdown-button">MORE ABOUT ME</button>
+        <div class="dropdown-content" id="dropdown-menu">
+            <a onclick="loadPage('site2.html')" target="_blank">RESEARCH</a>
+            <a onclick="loadPage('site3.html')" target="_blank">ACHIEVEMENTS</a>
+            <a onclick="loadPage('site1.html')" target="_blank">SKILLS</a>
+            <a onclick="loadPage('site4.html')" target="_blank">VALUES</a>
+            <a onclick="loadPage('site5.html')" target="_blank">FAMILY</a>
+            
+        </div>
+    </div>
+
+    <div class="content">
+        <h1 class="line-1 anim-typewriter" style="letter-spacing: 10px;" id="title">GABRIELE DUTLI</h1>
+        <h2>Curious for Life</h2>
+    </div>
+
+    <video id="videoplayerhtml" class="f-video-player" preload="" poster="" muted="" data-pmcvt="true">
+        <source src="final.mp4" type="video/mp4">
+        
+    </video>
+    
+
+    
+    
+    <div class="latest-section">
+        <div class="latest">LATEST</div>
+    </div>
+
+    <div class="white-section">
+        <div class="image-container">
+            <img src="AlainBerset.JPG" class="image1" alt="Your Image Description">
+            <div class="right-side">
+                <div class="text">
+                    Meeting with Alain Berset, one of seven federal councillors of Switzerland (until 2023):
+                    We had the possibility to speak to him and ask him questions. He was very
+                    funny and highlighted the importance of science to solve our biggest
+                    global problems.
+                </div>
+                <button class="readMore1" onclick="loadPage('site3.html#meeting-alain')">🕮</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="white-section">
+        <div class="image-container2">
+            <div class="left-side">    
+                <div class="text2">
+                    EUCYS 2023 competition took place in the heart of Europe (Brussels). 
+                    It was an honor to be able to represent Switzerland (🍫). The exchange between 
+                    the delegations and their excellent projects was a unique experience. 
+                    The richness of creativity, curiosity and ambitions inspired me and gave me hope 
+                    for the future.
+                </div>
+                <button class="readMore2" onclick="loadPage('site3.html#eucys-section')">🕮</button>
+            </div>
+            <img src="SwissDelegation.jpeg" class="image2" alt="Your second Image Description">
+        </div>
+    </div>
+
+    <div class="white-section">
+        <div class="image-container3">
+            <img src="Propaganda_Vision_finished.png" class="image3" alt="Your third Image Description">
+            <div class="right-side2">
+                <div class="text3">
+                    RESEARCH: Currently I'm looking for research partners. I'm particularly interested in
+                    universities as supporters for my project. Specifically, I am trying to create
+                    wireless, compostable sensors that can be mounted on hygrobots and give them the 
+                    ability to actively sense their environment. This could be a major milestone for
+                    environmental sciences.
+                </div>
+                <button class="readMore3" onclick="loadPage('site2.html')">🕮</button>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="black-section">
+        <h4>In a single seed lies the power to give birth to entire worlds. Let the seed of your dreams fall into the soil of possibilities and it will blossom to reveal the beauty of your inner landscape.</h4>
+    </div>
+    
+    <!-- White section with social media icons -->
+    <div class="social-section">
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/" target="_blank"><img src="facebook (1).png" alt="Facebook"></a></li>
+            <li><a href="https://twitter.com/indiscienceable" target="_blank"><img src="icons8-twitterx-60.png" alt="Twitter"></a></li>
+            <li><a href="https://www.instagram.com/gabriele.josee/" target="_blank"><img src="instagram (1).png" alt="Instagram"></a></li>
+            <li><a href="https://www.youtube.com/channel/UCy3v9MGMTjaEUH5nCrxT42A" target="_blank"><img src="youtube.png" alt="Youtube"></a></li>
+            <li><a href="https://ch.linkedin.com/in/gabriele-dutli-166636213" target="_blank"><img src="linkedin.png" alt="Linkedin"></a></li>
+            <!-- Add more social media icons with your own images as needed -->
+        </ul>
+    </div>
+    <div class="copyright">
+        <h6>© 2024 Gabriele Dutli</h6>
+    </div>
+    
+
+    
+    <script>
+        function myFunction() {
+            alert("Button clicked!");
+        }
+        function loadPage(pageUrl) {
+            window.location.href = pageUrl;
+        }
+        
+        function returnToMain() {
+            window.location.href = "main.html";
+        }
+        const revealImages = document.querySelectorAll('.image1');
+        const revealImage2 = document.querySelectorAll('.image2');
+        const revealImage3 = document.querySelectorAll('.image3');
+
+        const options = {
+            threshold: 0.2 // Adjust this threshold as needed
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        revealImages.forEach((image) => {
+            observer.observe(image);
+        });
+
+        revealImage2.forEach((image) => {
+            observer.observe(image);
+        });
+
+        revealImage3.forEach((image) => {
+            observer.observe(image);
+        });
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            const button = document.getElementById("dropdown-button");
+            const menu = document.getElementById("dropdown-menu");
+
+            // Open the menu when the button is clicked
+            button.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent the click event from closing the menu
+                menu.style.display = "block";
+            });
+
+            // Close the menu when clicking anywhere else on the page
+            document.addEventListener("click", function (e) {
+                if (e.target !== button && e.target !== menu) {
+                    menu.style.display = "none";
+                }
+            });
+
+            // Close the menu when scrolling
+            window.addEventListener("scroll", function () {
+                menu.style.display = "none";
+            });
+        });
+
+        //h1 animation
+        document.addEventListener('DOMContentLoaded',function(event){
+            // array with texts to type in typewriter
+            var dataText = [ "INNOVATOR", "INVENTOR", "VISIONARY", "NATURE LOVER", "GABRIELE DUTLI"];
+            
+            // type one text in the typwriter
+            // keeps calling itself until the text is finished
+            function typeWriter(text, i, fnCallback) {
+                // chekc if text isn't finished yet 
+                if (i < (text.length)) {
+                    // add next character to h1
+                    document.querySelector("h1").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
+
+                // wait for a while and call this function again for next character
+                setTimeout(function() {
+                    typeWriter(text, i + 1, fnCallback)
+                }, 100);
+                }
+                // text finished, call callback if there is a callback function
+                else if (typeof fnCallback == 'function') {
+                    // call callback after timeout
+                    setTimeout(fnCallback, 700);
+                }
+            }
+            // start a typewriter animation for a text in the dataText array
+            
+            function StartTextAnimation(i) {
+                if (typeof dataText[i] === 'undefined') {
+                    setTimeout(function () {
+                        StartTextAnimation(0);
+                    }, 20000);
+                } else {
+                    // check if dataText[i] exists and has length property
+                    if (dataText[i] && i < dataText[i].length) {
+                        // text exists! start typewriter animation
+                        typeWriter(dataText[i], 0, function () {
+                            // after the callback (and the whole text has been animated), start the next text
+                            StartTextAnimation(i + 1);
+                        });
+                    }
+                }
+            }
+            // start the text animation
+            StartTextAnimation(0);
+        });
+
+    </script>
+        
+    <script>
+            var $video = document.getElementById('videoplayerhtml');
+    
+            $(window).scroll(function(){
+                var speed = 150;
+                var scroll = $(this).scrollTop() / speed;
+                $video.currentTime = scroll;
+            });
+
+
+
+    </script>  
+
+
+
+        
+
+</script>
+       
+        
+</body>
+
+
+
+
+</html>

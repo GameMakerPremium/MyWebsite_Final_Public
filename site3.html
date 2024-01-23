@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ACHIEVEMENTS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            overflow: auto;
+            font-size: 12;
+            flex-direction: column;
+            display: flex;
+            min-height: 100vh;
+            background-color: rgb(245,244,240);
+        }
+        ::selection{
+            background-color: rgba(15,221,101,0.993);
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: auto; /* Adjust the height as needed */
+            overflow: hidden; /* Hide overflow content */
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensure the image covers the entire container */
+        }
+
+        
+
+        .content1 {
+            flex: 1;
+            padding: 20px;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image1 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .image1.expanded {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            position: fixed;
+            z-index: 999;
+            
+        }
+
+        .image-container1 {
+            float: right;
+            margin-bottom: 3vw;
+        }
+
+        .text-container {
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
+
+        .image2 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        .image2.expanded {
+            top: 50%;
+            left: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            z-index: 999;
+            width: 50%;
+            height: 50%;
+        }
+
+        
+        
+        h1 {
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            margin-left: 7vw;
+            margin-top: 5vw;
+            margin-right: 10vw;
+            font-size: calc(3vw+20px);
+        }
+        h4 {
+            font-family: 'Segoe UI';
+            margin-left: 4vw;
+            margin-right: 4vw;
+            text-align: justify;
+        }
+
+
+
+
+        .button-container {
+            position: relative;
+            float: left;
+            margin-left: 50px;
+            margin-bottom: 30px;
+        }
+        .returnButton {
+            border-radius: 25px;
+            color:rgb(255, 255, 255);
+            background-color: black;
+            padding: 10px 33px;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 2;
+            
+        }
+        .returnButton:hover {
+            color:rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            border: 3px solid rgb(15,221,101);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .returnButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+        .back-button-container {
+            position: absolute;
+            display: flex;
+            margin-left: 30px;
+            margin-top: 25px;
+        }
+        .backButton {
+            color:rgb(255, 255, 255);
+            background-color: black;
+            max-height: 40px;
+            max-width: 90px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            
+        }
+        .backButton:hover {
+            color:rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            border: 3px solid rgb(15, 221, 101);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .backButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            /*position: fixed;
+            bottom: 0;*/
+            position: relative;
+            
+        }
+
+        .social-icons li {
+            margin-right: 6vw;
+        }
+
+        .social-icons img {
+            width: 4vw;
+            height: 4vw;
+            max-width: 30px;
+            max-height: 30px;
+            /*border-radius: 50%;*/
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hover effect */
+        .social-icons img:hover {
+            opacity: 0.7;
+        }
+        .copyright {
+            padding: 0px 0px;
+            height: 20px;
+        }
+        h3 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: left;
+            margin-right: 10vw;
+            margin-bottom: 10px; 
+            margin-left: 7vw;
+        }
+        h6 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: right;
+            margin-right: 2vw;
+            margin-bottom: 10px;
+            margin-left: 10vw;
+        }
+
+        .dropdown {
+            position: absolute;
+            /*display: inline-block;*/
+            /*margin-right: 50px;*/
+            margin-top: 25px;
+            z-index: 1000;
+            right: 30px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .dropbtn {
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+            max-height: 40px;
+            max-width: 180px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family:'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
+        .dropbtn:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            border: 3px solid rgb(0, 0, 0);
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+
+        .dropbtn:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+        .dropdown-content {
+            display: none;
+            
+            background-color: rgb(0, 0, 0);
+            min-width: 90px;
+            max-width: 175px;
+            width: 40vw;
+            border: 3px solid rgb(15,221,101);
+            font-family:'Segoe UI';
+            z-index: 1000;
+            
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }  
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px); /* Adjust the blur level as needed */
+            pointer-events: none; /* Allows click events to pass through the overlay */
+            z-index: 998; /* Below the expanded image */
+            opacity: 0; /* Initially transparent */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .overlay.active {
+            opacity: 1; /* Show the overlay when the image is expanded */
+            z-index: 998;
+        }
+        .copyright2 {
+            font-style: italic;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .image-container1 {
+                align-items: center;
+                float: none;
+            }
+            .image1 {
+                align-self: center;
+            }
+            .image2 {
+                align-self: center;
+            }
+            .text-container {
+                width: 100%;
+                clear: both;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <img src="Scientific Achievements.png" alt="Hero Image">
+        <!-- You can add other content inside the hero section if needed -->
+    </div>
+    
+    <div class="back-button-container">
+        <button class="backButton" onclick="returnToMain()">BACK</button>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">MORE ABOUT ME</button>
+        <div class="dropdown-content">
+            <a onclick="loadPage('site2.html')" target="_blank">RESEARCH</a>
+            <a onclick="loadPage('site3.html')" target="_blank">ACHIEVEMENTS</a>
+            <a onclick="loadPage('site1.html')" target="_blank">SKILLS</a>
+            <a onclick="loadPage('site4.html')" target="_blank">VALUES</a>
+            <a onclick="loadPage('site5.html')" target="_blank">FAMILY</a>
+        
+        </div>
+    </div>
+    <h1>SCIENTIFIC ACHIEVEMENTS</h1>
+    <h3>Although my scientific career has only just begun, my curiosity and ambition have already 
+        earned me some small successes. This brings me closer to my life's goal of making the world 
+        a better place. 
+    </h3>
+    <h3>High school: Matura thesis award (2023)</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="Prämierung_squared.png" class="image1" alt="Image1">
+        </div>    
+        <div class = "text-container" >
+            <h4>In Switzerland, a final thesis (Matura thesis) must be submitted at the end of the 
+                six-year high school period. Students can choose their own topic and pursue their own 
+                interests within a school setting. This provides a rare opportunity to familiarise 
+                yourself with a topic and carry out research independently.
+            </h4>
+            
+            <h4>
+                I took advantage of this opportunity because of my preference for autodidactic 
+                and in-depth learning. I have learnt how to work scientifically. I spent a lot of 
+                time understanding scientific publications, measuring material properties and 
+                mastering 3D printing. Of course, I also had to deal with time pressure and many obstacles.
+                In the end, I also learnt how to write a scientific paper. The result was a paper of almost 
+                seventy pages, which in the end was awarded the highest grade and honoured by an internal 
+                school jury. This first success motivated me to further develop my work.
+            </h4>
+            <h6 class="copyright2">Source image: Kantonsschule Zürich Nord, originator/photographer: Christina Hemauer</h6>
+        </div>             
+    </div>
+    <h1></h1>
+    <h3>Swiss Youth in Science Contest 2023</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="Stand_097_squared.png" class="image1" alt="image2">
+            <div class="overlay"></div>
+        </div>    
+        <div class = "text-container" >
+            <h4>
+                In the national competition for young researchers, participants go through 
+                several selection procedures to reach the final. At the end, each project is given 
+                a rating (good, very good, excellent). One can also win special prizes such as 
+                participation in other competitions or in special events.
+            </h4>
+            <h4>
+                The organisation helped me to 
+                bring my work to a national stage and gain self-confidence. I got involved in many interesting 
+                conversations that reinforced my belief that I was developing a promising and useful technology.
+                I received the rating "excellent" and two special prizes: Participation in the European and 
+                World Championships for Young Researchers in Brussels and Los Angeles respectively.
+            </h4>
+            <h4>
+                With these unexpected successes, my work was promoted to an international level.
+                Suddenly I was part of a delegation that was supposed to represent our country. For me, 
+                however, it was more a matter of pride than pressure. It also fuelled my ambition.
+            </h4>
+        </div>             
+    </div>
+    <h1></h1>
+    <h3>Media: My work receives public attention</h3>
+    <div class="content1">  
+        <div class = "image-container1">
+            <img src="Zeitung_squared.png" class="image1" alt="Image1">
+            
+        </div> 
+        <div class = "text-container" >
+            <h4>My work was mentioned in the local newspaper. In this way, the citizens of my 
+                village could be informed about my still unknown research topic. In the interview, 
+                I also tried to motivate young people for science and research.</h4>
+
+            <h4>
+                Furthermore, the article talks about my experiences (difficulties, approach, 
+                motivation) during my research. It also discusses my relationship to research 
+                and science. For me, rational thinking is a calming tool and a place of retreat 
+                in times of social turbulence and war fears.
+            </h4>
+            <h4>
+                Finally, the article mentions my visions for the future and my intentions for 
+                research projects in general, namely to make the world a better place.
+            </h4>
+        </div>             
+    </div>
+    <h1></h1>
+    <h3 id="eucys-section">European Union Contest for Young Scientists (EUCYS, 2023)</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="EUCYS_delegation_squared.png" class="image1" alt="Image1">
+            
+        </div>    
+        <div class = "text-container" >
+            <h4>The European Championship for Young Researchers took place in September. 
+                I had the opportunity to represent Switzerland in Brussels together with two other members 
+                of the delegation. Delegations from numerous European countries spent a week discussing their 
+                research projects. There was a cosmopolitan atmosphere and it was very fulfilling to 
+                exchange ideas with other young people who were equally enthusiastic about science.
+                The scientific exchange gave me hope that despite our different customs and cultures 
+                and the increasing international conflicts, we can still reach a consensus and work together 
+                for a better future.
+            </h4>
+        </div>             
+    </div>
+    <h1></h1>
+    <h3 id="meeting-alain">Meeting with President of Federal Council Alain Berset (2023)</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="AlainBerset_squared.png" class="image1" alt="Image1">
+            
+        </div>    
+        <div class = "text-container" >
+            <h4>I met with the President of the Swiss Confederation (in 2023), Alain Berset, 
+                and other winners of the 57th national science competition. He humorously emphasised the role of 
+                science in politics (example of corona) and the responsibility/duty of the younger 
+                generations to solve the big problems of the future. The Federal Councillor also mentioned 
+                the advantages of Switzerland for us young researchers: Excellent universities and 
+                organisations, such as Swiss Youth in Science, which support us, with our projects.
+            </h4>
+            <h4>
+                For me, the meeting with the Federal Councillor was a surreal experience. I am very 
+                interested in politics and constantly follow the latest developments in Parliament. 
+                Therefore, to physically meet such a prominent personality, who you 
+                normally only know from the media, was so far beyond my imagination that I would
+                never have dreamed of it. But thanks to my scientific work and the tireless 
+                commitment of Swiss Youth in Science, this became a reality. So a big thank 
+                you to Swiss Youth in Science and Alain Berset!
+            </h4>
+        </div>             
+    </div>
+    <h1></h1>
+        <!-- Your page content goes here -->
+    <div class="button-container">
+        <button class="returnButton" onclick="returnToMain()">RETURN</button>
+    </div>
+    <div class="social-section">
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/" target="_blank"><img src="facebook (1).png" alt="Facebook"></a></li>
+            <li><a href="https://twitter.com/indiscienceable" target="_blank"><img src="icons8-twitterx-60.png" alt="Twitter"></a></li>
+            <li><a href="https://www.instagram.com/gabriele.josee/" target="_blank"><img src="instagram (1).png" alt="Instagram"></a></li>
+            <li><a href="https://www.youtube.com/channel/UCy3v9MGMTjaEUH5nCrxT42A" target="_blank"><img src="youtube.png" alt="Youtube"></a></li>
+            <li><a href="https://ch.linkedin.com/in/gabriele-dutli-166636213" target="_blank"><img src="linkedin.png" alt="Linkedin"></a></li>
+            <!-- Add more social media icons with your own images as needed -->
+        </ul>
+    </div>
+    <div class="copyright">
+        <h6>© 2024 Gabriele Dutli</h6>
+    </div>
+
+    <script>
+        function returnToMain() {
+            window.location.href = "main.html";
+        }
+        function loadPage(pageUrl) {
+            window.location.href = pageUrl;
+        }
+        const image2 = document.querySelectorAll('.image1');
+        const overlay = document.querySelector('.overlay');
+       
+    </script>
+</body>
+</html>

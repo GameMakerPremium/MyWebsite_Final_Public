@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VALUES</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            overflow: auto;
+            font-size: 12;
+            flex-direction: column;
+            display: flex;
+            min-height: 100vh;
+            background-color: rgb(245,244,240);
+        }
+        ::selection{
+            background-color: rgba(15, 221, 101, 0.993);
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: auto; /* Adjust the height as needed */
+            overflow: hidden; /* Hide overflow content */
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensure the image covers the entire container */
+        }
+
+        .content1 {
+            flex: 1;
+            padding: 20px;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image1 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .image1.expanded {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            position: fixed;
+            z-index: 999;
+            
+        }
+
+        .image-container1 {
+            float: right;
+            margin-bottom: 3vw;
+        }
+
+        .text-container {
+            margin-left: 2vw;
+            margin-right: 2vw;
+        }
+
+        .image2 {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        .image2.expanded {
+            top: 50%;
+            left: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%); /* Scale up by 90% */
+            z-index: 999;
+            width: 50%;
+            height: 50%;
+        }
+
+        .bilayer-video {
+            max-width: 400px;
+            max-height: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            
+            width: 30vw;
+            height: 30vw;
+            
+            margin-top: 1vw;
+            
+            margin-right: 4vw;
+            margin-left: 4vw;
+
+            transition: all 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        
+        
+        h1 {
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            margin-left: 7vw;
+            margin-top: 5vw;
+            margin-right: 10vw;
+        }
+        h4 {
+            font-family: 'Segoe UI';
+            margin-left: 4vw;
+            margin-right: 4vw;
+            text-align: justify;
+        }
+
+
+
+
+        .button-container {
+            position: relative;
+            float: left;
+            margin-left: 50px;
+            margin-bottom: 30px;
+        }
+        .returnButton {
+            border-radius: 25px;
+            
+            color:rgb(255, 255, 255);
+            background-color: black;
+            padding: 10px 33px;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 2;
+            
+        }
+        .returnButton:hover {
+            color:rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            border: 3px solid rgb(15, 221, 101);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .returnButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+        .back-button-container {
+            position: absolute;
+            display: flex;
+            margin-left: 30px;
+            margin-top: 25px;
+        }
+        .backButton {
+            color:rgb(255, 255, 255);
+            background-color: black;
+            max-height: 40px;
+            max-width: 90px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            
+        }
+        .backButton:hover {
+            color:rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            border: 3px solid rgb(15, 221, 101);
+            font-weight:bold;
+            z-index: 2;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+        .backButton:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            /*position: fixed;
+            bottom: 0;*/
+            position: relative;
+            
+        }
+
+        .social-icons li {
+            margin-right: 6vw;
+        }
+
+        .social-icons img {
+            width: 4vw;
+            height: 4vw;
+            max-width: 30px;
+            max-height: 30px;
+            /*border-radius: 50%;*/
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hover effect */
+        .social-icons img:hover {
+            opacity: 0.7;
+        }
+        .copyright {
+            padding: 0px 0px;
+            height: 20px;
+        }
+        h3 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: left;
+            margin-right: 10vw;
+            margin-bottom: 10px; 
+            margin-left: 7vw;
+        }
+        h6 {
+            font-family:'Lucida Sans Unicode';
+            color: rgb(0, 0, 0);
+            text-align: right;
+            margin-right: 2vw;
+            margin-bottom: 10px;
+            margin-left: 10vw;
+        }
+
+        .dropdown {
+            position: absolute;
+            /*display: inline-block;*/
+            /*margin-right: 50px;*/
+            margin-top: 25px;
+            z-index: 1000;
+            right: 30px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .dropbtn {
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+            max-height: 40px;
+            max-width: 180px;
+            height: 15vw;
+            width: 40vw;
+            cursor: pointer;
+            font-family:'Segoe UI';
+            font-weight: bold;
+            border: 3px solid black;
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
+        .dropbtn:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            border: 3px solid rgb(0, 0, 0);
+            z-index: 1000;
+            box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0),0 17px 50px 0 rgba(255, 255, 255, 0);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(0.95);
+        }
+
+        .dropbtn:not(:hover) {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.15),0 17px 50px 0 rgba(0,0,0,0.19);
+            transition: transform 0.8s, box-shadow 0.8s;
+            transform: scale(1);
+        }
+        .dropdown-content {
+            display: none;
+            
+            background-color: rgb(0, 0, 0);
+            min-width: 90px;
+            max-width: 175px;
+            width: 40vw;
+            border: 3px solid rgb(15, 221, 101);
+            font-family:'Segoe UI';
+            z-index: 1000;
+            
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }  
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px); /* Adjust the blur level as needed */
+            pointer-events: none; /* Allows click events to pass through the overlay */
+            z-index: 998; /* Below the expanded image */
+            opacity: 0; /* Initially transparent */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .overlay.active {
+            opacity: 1; /* Show the overlay when the image is expanded */
+            z-index: 998;
+        }
+        
+                /* Slideshow container */
+        .slideshow-container {
+            min-width: 200px;
+            max-width: 700px;
+            width: 50vw;
+            position: relative;
+            margin: auto;
+        }
+        
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: rgb(80, 80, 80);
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 50px;
+            user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 50px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+            color: rgb(15, 221, 101);
+        }
+
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+            font-family: 'Lucida Sans Unicode';
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 2vw;
+            min-height: 5px;
+            max-height: 15px;
+            width: 2vw;
+            min-width: 5px;
+            max-width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: rgb(15,221,101);
+        }
+
+        /* The dots/bullets/indicators */
+        .dot2 {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot2:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .image-container1 {
+                align-items: center;
+                float: none;
+            }
+            .image1 {
+                align-self: center;
+            }
+            .image2 {
+                align-self: center;
+            }
+            .bilayer-video{
+                align-self: center;
+            }
+            .text-container {
+                width: 100%;
+                clear: both;
+            }
+        }
+
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }       
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <img src="values_&_beliefs.png" alt="Hero Image">
+        <!-- You can add other content inside the hero section if needed -->
+    </div>
+    
+    <div class="back-button-container">
+        <button class="backButton" onclick="returnToMain()">BACK</button>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">MORE ABOUT ME</button>
+        <div class="dropdown-content">
+            <a onclick="loadPage('site2.html')" target="_blank">RESEARCH</a>
+            <a onclick="loadPage('site3.html')" target="_blank">ACHIEVEMENTS</a>
+            <a onclick="loadPage('site1.html')" target="_blank">SKILLS</a>
+            <a onclick="loadPage('site4.html')" target="_blank">VALUES</a>
+            <a onclick="loadPage('site5.html')" target="_blank">FAMILY</a>
+           
+        </div>
+    </div>
+    <h1>VALUES, BELIEFS & PERSONAL PREDICTIONS</h1>
+    <h3>My life, but also my goals and research, are based on certain values.
+        They serve as a reference and evaluation of my work.
+        This page lists some of my most important values and views.
+        Moreover, you can read some of my predictions for the future.
+    </h3>
+    <h3>1) Sustainability</h3>
+    <div class="content1"> 
+        <div class = "image-container1">
+            <img src="ecologist.jpg" class="image1" alt="Image1">
+            <div class="overlay"></div>
+        </div> 
+        <div class = "text-container" >
+            <h4>The term "sustainability" comprises three dimensions: ecological, economic and social 
+                sustainability.
+                Personally, I try above all to live in an ecologically and socially (see section "Philantropy") sustainable way.
+            </h4>
+            <h4>
+                For me, environmentally friendly living means limited travelling (if necessary by public transport),
+                 low and environmentally conscious consumption, reducing electricity consumption to a minimum and 
+                 separating and recycling waste. I also support animal welfare organisations, such as  
+                 WWF, and actively research technologies that can solve our current environmental problems.
+                 As an environmentally conscious student, I am very concerned about the current developments 
+                 in global environmental policy and the state of essential ecosystems. Climate change is 
+                 causing irreversible changes for all living organisms and increasing global inequality.
+                 I am also very worried about the extinction of species and environmental pollution.
+                 For example, I investigated the production of antibiotics in India and found out about the 
+                 terrible consequences that are already having an impact today.
+            </h4>
+        </div>             
+    </div>
+    <h3>2) Philantropy</h3>
+    <div class="content1">
+        <div class = "image-container1">
+            <img src="philantropy.jpg" class="image1" alt="Image1">
+            <div class="overlay"></div>
+        </div>     
+        <div class = "text-container" >
+            <h4>
+                In order to develop my research in a socially sustainable way, I try to use common, 
+                inexpensive and commercially available materials. Furthermore, I avoid patents and 
+                focus on the democratisation of designs and manufacturing processes.
+            </h4>
+            <h4>
+                My ultimate goal is to commercialise my sustainable technologies. Once I have the necessary 
+                financial capacity, I will use all my assets as efficiently as possible for philanthropic 
+                purposes. My goal in life is to fight poverty and eventually eradicate it. As a moral person, 
+                I think that poverty is unacceptable given the extreme wealth in the West.
+                Our empathy should not be limited to ethnicity or borders. As long as someone is suffering 
+                while I can enjoy life, I have an unrelenting urge to fix the injustice.
+            </h4>
+        </div>             
+    </div>
+
+    <h3>3) Cosmopolitanism</h3>
+    <div class="content1">   
+        <div class = "text-container" >
+            <h4>
+                Because of my multicultural and multilingual socialization, 
+                various languages and cultures are also in my field of knowledge 
+                and have led to cosmopolitan thinking. I had the privilege of travelling
+                to various countries in Europe as a young teenager. This allowed me 
+                to understand different perspectives and enjoy the food, architecture,
+                art and landscapes of different nations.
+            </h4>
+            <h4>
+                But it's also important to mention that since I became aware
+                of climate change, I've only travelled to visit my family or 
+                for professional reasons. That's why many of the pictures below 
+                were taken by my family. Nevertheless, they are proof of my family's 
+                cultural openness and way of thinking, which have influenced me.
+            </h4>
+        </div> 
+        <h2></h2>
+        <div class="slideshow-container">
+
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+              <div class="numbertext">1 / 19</div>
+              <img src="Paris2_squared.png" style="width:100%">
+            </div>
+          
+            <div class="mySlides fade">
+              <div class="numbertext">2 / 19</div>
+              <img src="Italy4_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 19</div>
+                <img src="Italy2_squared.png" style="width:100%">
+            </div>
+          
+            <div class="mySlides fade">
+              <div class="numbertext">4 / 19</div>
+              <img src="Barcelona_2_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">5 / 19</div>
+                <img src="Landscape_1_squared.png" style="width:100%">
+              </div>
+          
+            <div class="mySlides fade">
+                <div class="numbertext">6 / 19</div>
+                <img src="Street_1_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">7 / 19</div>
+                <img src="Italy7_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">8 / 19</div>
+                <img src="Canada_3_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">9 / 19</div>
+                <img src="Greece_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">10 / 19</div>
+                <img src="USA_1_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">11 / 19</div>
+                <img src="London_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">12 / 19</div>
+                <img src="Milano_1_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">13 / 19</div>
+                <img src="USA_3_squared.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">14 / 19</div>
+                <img src="Madrid_2_squared.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">15 / 19</div>
+                <img src="Skandinavien_1_squared.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">16 / 19</div>
+                <img src="Plane_2_squared.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">17 / 19</div>
+                <img src="Canada_2_squared.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">18 / 19</div>
+                <img src="Barcelona_3_squared.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">19 / 19</div>
+                <img src="GC_3_squared.png" style="width:100%">
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+            <span class="dot" onclick="currentSlide(9)"></span>
+            <span class="dot" onclick="currentSlide(10)"></span>
+            <span class="dot" onclick="currentSlide(11)"></span>
+            <span class="dot" onclick="currentSlide(12)"></span>
+            <span class="dot" onclick="currentSlide(13)"></span>
+            <span class="dot" onclick="currentSlide(14)"></span>
+            <span class="dot" onclick="currentSlide(15)"></span>
+            <span class="dot" onclick="currentSlide(16)"></span>
+            <span class="dot" onclick="currentSlide(17)"></span>
+            <span class="dot" onclick="currentSlide(18)"></span>
+            <span class="dot" onclick="currentSlide(19)"></span>
+        </div>        
+    </div>
+
+    <div class="content1"></div>
+
+    <h3>Prediction #1: The new era: Symbiocene</h3>
+    <div class="content1">   
+        <div class = "image-container1">
+            <img src="solarpunk3.png" class="image1" alt="Image1">
+            <div class="overlay"></div>
+        </div> 
+        <div class = "text-container" >
+            
+            <h4>The Symbiocene, represents a period where humanity integrates symbiotic principles into social life, reconnecting with nature.
+                Important principles for the Symbiocene include eliminating toxic substances, prioritizing renewable resources, and repairing symbiotic bonds. These principles are deemed feasible and already in practice in emerging innovations such as biodegradable materials and renewable energy sources.
+            </h4>    
+            <h4>The term "Symbiocene" was coined by Glenn Albrecht. Glenn Albrecht's text, "An Invitation to the Symbiocene," addresses the challenges of the Anthropocene era, characterized by human dominance causing environmental crises like climate change, extinction, and pollution. Albrecht emphasizes the urgent need to change direction due to the negative impacts affecting both Earth's ecosystems and human well-being.
+
+                The Anthropocene era evolved with flawed ideologies, leading to a globalized, homogenized system detrimental to life. Albrecht proposes the Symbiocene as a new era fostering symbiotic thinking for nurturing humanity alongside nature. 
+                
+                The concept of symbiosis, indicating organisms living together for mutual benefit, is central. Scientific discoveries reveal the importance of symbiosis from micro to macro levels, emphasizing the interconnectedness of life. Albrecht challenges the perception of ourselves, considering humans as holobionts, composed of multiple organisms coexisting.
+                
+                Albrecht critiques the concept of 'the environment', advocating for a shift towards a sumbiocentric view acknowledging the interconnectedness of life. 
+                
+                Albrecht envisions the emergence of a biofilm marking the geological commencement of the Symbiocene, covering past pollution. Ultimately, the Symbiocene offers guidance for a sustainable future based on symbiotic relationships and a swift transition.
+            </h4>
+            <h4>
+                Furthermore, people will live in small, self-sufficient, and anarchistic communities (deglobalisation, local economies).
+            </h4>
+        </div> 
+    </div>
+
+    <h3>Prediction #2: Transhumanism</h3>
+    <div class="content1">   
+        <div class = "image-container1">
+            <img src="Transhumanism.png" class="image1" alt="Image1">
+            <div class="overlay"></div>
+        </div> 
+        <div class = "text-container" >
+            <h4>
+                Due to many rapidly emergent technologies, like artificial intelligence (ChatGPT), biotechnology,
+                nantotechnology and genetic engineering, I believe that we are going to enhance our
+                human capabilities and transcend the limitations of the human body and mind. We will 
+                improve our human physical, cognitive, and psychological abilities. I envision a future 
+                where we overcome aging, disease, and other biological constraints through technological 
+                advancements. The first cyborgs live already among us. In near future, as we better understand 
+                our brains, we will have brain-computer interfaces (e.g. Neuralink), which will 
+                revolutionise the way we communicate, learn and work.
+            </h4>
+        </div> 
+    </div>
+
+    <h3>Prediction #3: World government</h3>
+    <div class="content1">   
+        <div class = "image-container1">
+            <img src="world government upscaled.png" class="image1" alt="Image1">
+            <div class="overlay"></div>
+        </div> 
+        <div class = "text-container" >
+            <h4>Once Mars colonisations are established and humanity becomes a multiplanetary or 
+                eventually a multistellar species, conflicts will shift from the nation level to the 
+                planet level. Moreover, as the Internet and other future networks will have made the younger generations more or less culturally and ideologically 
+                homogeneous, religious and national identities will lose their value.
+                This will result in a supranational unification movement. 
+                Borders and national governments will disappear. 
+                One world government will rule over all of humanity on earth. 
+                Inequality on earth will decrease as the well-being of each individual (national interests have disappeared) will be a priority.
+                
+            </h4>
+        </div> 
+    </div>
+
+    <h3>Prediction #4: Labour-free society</h3>
+    <div class="content1">   
+        <div class = "image-container1">
+            <img src="Automatisation.png" class="image1" alt="Image1">
+            <div class="overlay"></div>
+        </div> 
+        <div class = "text-container" >
+            <h4>
+                The cost of producing goods will converge towards zero in the future with increasing automation. 
+                Robots and machines will take over all our physical tasks. 
+                Our current understanding of the economy and money will no longer make sense.
+                The only currency will be creativity and humanness. Going to work will be voluntary.
+            </h4>
+        </div> 
+    </div>
+
+
+        <!-- Your page content goes here -->
+    <div class="button-container">
+        <button class="returnButton" onclick="returnToMain()">RETURN</button>
+    </div>
+    <div class="social-section">
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/" target="_blank"><img src="facebook (1).png" alt="Facebook"></a></li>
+            <li><a href="https://twitter.com/indiscienceable" target="_blank"><img src="icons8-twitterx-60.png" alt="Twitter"></a></li>
+            <li><a href="https://www.instagram.com/gabriele.josee/" target="_blank"><img src="instagram (1).png" alt="Instagram"></a></li>
+            <li><a href="https://www.youtube.com/channel/UCy3v9MGMTjaEUH5nCrxT42A" target="_blank"><img src="youtube.png" alt="Youtube"></a></li>
+            <li><a href="https://ch.linkedin.com/in/gabriele-dutli-166636213" target="_blank"><img src="linkedin.png" alt="Linkedin"></a></li>
+            <!-- Add more social media icons with your own images as needed -->
+        </ul>
+    </div>
+    <div class="copyright">
+        <h6>© 2024 Gabriele Dutli</h6>
+    </div>
+
+    <script>
+        function returnToMain() {
+            window.location.href = "main.html";
+        }
+        function loadPage(pageUrl) {
+            window.location.href = pageUrl;
+        }
+        const image2 = document.querySelectorAll('.image1');
+        const overlay = document.querySelector('.overlay');
+   
+        
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+        
+        
+        
+
+    </script>
+</body>
+</html>
