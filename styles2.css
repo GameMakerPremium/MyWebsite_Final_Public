@@ -563,6 +563,9 @@ h6 {
 @font-face {
     font-family: 'Segoe UI';
     src: url('Segoe UI This.woff2');
+    src: url('Segoe UI This.woff');
+    src: url('Segoe UI This.ttf');
+    src: url('Segeo UI This.eot');
 }
 
 
