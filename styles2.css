@@ -559,3 +559,10 @@ h6 {
 .dropdown:hover .dropdown-content {
     display: block;
 }  
+
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('Segoe UI This.woff2');
+}
+
+
